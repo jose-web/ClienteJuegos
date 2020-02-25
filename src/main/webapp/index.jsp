@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="daw.clientejuegosModelo.JuegoVO"%>
 <%@page import="daw.clientejuegosModelo.JuegoDAO"%>
 <%@page import="daw.clientejuegosModelo.UsuarioDAO"%>
 <%@page import="java.time.LocalDate"%>
@@ -17,7 +19,9 @@
              LocalDate fecha = LocalDate.of(1988, 04, 13);
             UsuarioDAO.insertar_usuario("rosa", "1234", fecha, 2.36, "joselito");
             
-            JuegoDAO.insertar_usuario("Pokemon", "w", "rol", "Capturar pokemon", 6, 45.99);
+            JuegoDAO.insertar_usuario("Gris", "w", "rol", "Seguir una historia", 6, 45.99);
+            
+    
            %>
     </body>
 </html>

@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -17,9 +18,10 @@ import java.time.LocalDate;
  *
  * @author Rosa
  */
+
 public class UsuarioDAO {
-    
-        private static final Connection CONEXION = Conexion.getInstance();
+
+    private static final Connection CONEXION = Conexion.getInstance();
 
     public static void insertar_usuario(
             String nombre,
@@ -65,5 +67,34 @@ public class UsuarioDAO {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static int login_Usuario(String nombre, String password) {
+        ResultSet res;
+        int resultado = -1;
+
+        String sql = "select count(*) as cuentaUsuario from usuario where nombre = ? and password = ?";
+        PreparedStatement prest;
+
+        try {
+            prest = CONEXION.prepareStatement(sql);
+
+            prest.setString(1, nombre);
+            prest.setString(2, toMd5(password));
+
+            res = prest.executeQuery();
+
+            if (res.next()) {
+                resultado = res.getInt("cuentaUsuario");
+            }
+            
+            prest.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas durante la inserción de datos en la tabla usuario");
+            System.out.println(e);
+        }
+
+        return resultado;
     }
 }

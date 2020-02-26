@@ -5,6 +5,6 @@
  */
 
 function registro() {
-    document.getElementById("usuarioLogin").removeAttribute("required");
+    document.getElementById("nicknameLogin").removeAttribute("required");
     document.getElementById("passLogin").removeAttribute("required");
 }

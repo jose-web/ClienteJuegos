@@ -18,8 +18,8 @@
         <form action="./Login" method="POST">
             <table>
                 <tr>
-                    <td><label for="usuarioLogin">Usuario:</label></td>
-                    <td><input type="text" name="usuarioLogin" id="usuarioLogin" required></td>
+                    <td><label for="nicknameLogin">Nickname:</label></td>
+                    <td><input type="text" name="nicknameLogin" id="nicknameLogin" required></td>
                 </tr>
                 <tr>
                     <td><label for="passLogin">Contraseña</label></td>
@@ -31,7 +31,7 @@
                 </tr>
             </table>
         </form>
-        
+
         <script src="js/script.js"></script>
     </body>
 </html>

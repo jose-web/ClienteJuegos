@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
             if ("registrarse".equals(request.getParameter("registrarse"))) {
                 out.print("Registro");
             } else if ("entrar".equals(request.getParameter("entrar"))) {
-                int login = UsuarioDAO.login_Usuario(request.getParameter("usuarioLogin"), request.getParameter("passLogin"));
+                int login = UsuarioDAO.login_Usuario(request.getParameter("nicknameLogin"), request.getParameter("passLogin"));
                 switch (login) {
                     case -1:
                         out.print("error");

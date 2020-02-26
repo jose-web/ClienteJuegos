@@ -73,7 +73,7 @@ public class UsuarioDAO {
         ResultSet res;
         int resultado = -1;
 
-        String sql = "select count(*) as cuentaUsuario from usuario where nombre = ? and password = ?";
+        String sql = "select count(*) as cuentaUsuario from usuario where nickname = ? and password = ?";
         PreparedStatement prest;
 
         try {

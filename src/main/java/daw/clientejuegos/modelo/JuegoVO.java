@@ -27,8 +27,7 @@ public class JuegoVO {
         this.precio = precio;
     }
 
-    JuegoVO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public JuegoVO() {
     }
 
     public String getNombre_juego() {

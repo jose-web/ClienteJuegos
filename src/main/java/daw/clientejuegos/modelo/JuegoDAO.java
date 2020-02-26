@@ -52,4 +52,41 @@ public class JuegoDAO {
         }
     }
     
+    
+     public static ArrayList<JuegoVO> consultarJuegos(){
+        Statement st;
+        ResultSet res;
+        ArrayList<JuegoVO> lista = new ArrayList();
+        
+        // Guardo la consulta SQL realizar en una cadena
+        String sql="select * from juego";
+
+        try {
+            
+            // Preparamos Statement
+            st = CONEXION.createStatement(); 
+            // Ejecutamos la sentencia y obtenemos la tabla resultado
+            res = st.executeQuery(sql);
+            // Ahora construimos la lista
+            while (res.next()){
+                JuegoVO j = new JuegoVO();
+                // Recogemos los datos del turismo, guardamos en un objeto
+                j.setNombre_juego(res.getString("nombre_juego"));
+                j.setSistema_operativo(res.getString("sistema_operativo"));
+                j.setPegi(res.getInt("pegi"));
+                
+
+                //Añadimos el objeto al array
+                lista.add(j);
+            }
+            // Cerramos el recurso PreparedStatement 
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas durante la consulta en tabla Jugadores");
+            System.out.println(e); 
+        }
+
+        return lista;  
+    }
 }

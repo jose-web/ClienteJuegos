@@ -11,6 +11,7 @@ package daw.clientejuegos.modelo;
  */
 public class JuegoVO {
     
+    private int id_juego;
     private String nombre_juego;
     private String sistema_operativo;
     private String tipo;
@@ -18,7 +19,8 @@ public class JuegoVO {
     private int pegi;
     private double precio;
 
-    public JuegoVO(String nombre_juego, String sistema_operativo, String tipo, String descripcion, int pegi, double precio) {
+    public JuegoVO(int id_juego,String nombre_juego, String sistema_operativo, String tipo, String descripcion, int pegi, double precio) {
+        this.id_juego=id_juego;
         this.nombre_juego = nombre_juego;
         this.sistema_operativo = sistema_operativo;
         this.tipo = tipo;
@@ -28,6 +30,14 @@ public class JuegoVO {
     }
 
     public JuegoVO() {
+    }
+
+    public int getId_juego() {
+        return id_juego;
+    }
+
+    public void setId_juego(int id_juego) {
+        this.id_juego = id_juego;
     }
 
     public String getNombre_juego() {
@@ -80,8 +90,10 @@ public class JuegoVO {
 
     @Override
     public String toString() {
-        return "JuegoVO{" + "nombre_juego=" + nombre_juego + ", sistema_operativo=" + sistema_operativo + ", tipo=" + tipo + ", descripcion=" + descripcion + ", pegi=" + pegi + ", precio=" + precio + '}';
+        return "JuegoVO{" + "id_juego=" + id_juego + ", nombre_juego=" + nombre_juego + ", sistema_operativo=" + sistema_operativo + ", tipo=" + tipo + ", descripcion=" + descripcion + ", pegi=" + pegi + ", precio=" + precio + '}';
     }
+
+  
     
     
     

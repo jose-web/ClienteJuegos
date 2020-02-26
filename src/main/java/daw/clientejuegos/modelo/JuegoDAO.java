@@ -127,5 +127,24 @@ public class JuegoDAO {
 
         return lista;  
     }
+    
+    public static  int delete_juego(int juego) throws SQLException {
+        
+        int numFilas = 0;
+        
+        
+        String sql = "delete from juego where id_juego = ?";
+
+        // Sentencia parametrizada
+        try (PreparedStatement prest = CONEXION.prepareStatement(sql)) {
+
+            // Establecemos los parámetros de la sentencia
+            prest.setInt(1, juego);
+            // Ejecutamos la sentencia
+            numFilas = prest.executeUpdate();
+        }
+        return numFilas;
+    }
+
      
 }

@@ -123,6 +123,48 @@ public class JuegoDAO {
 
         return lista;
     }
+    
+    public static JuegoVO buscar_juego(int id_juego){
+        
+        Statement st;
+        ResultSet res;
+        JuegoVO juego = new JuegoVO();
+        
+                // Guardo la consulta SQL realizar en una cadena
+        String sql = "select * from juego where id_juego="+id_juego;
+        try {
+
+            // Preparamos Statement
+            st = CONEXION.createStatement();
+            // Ejecutamos la sentencia y obtenemos la tabla resultado
+            res = st.executeQuery(sql);
+            // Ahora construimos la lista
+            while (res.next()) {
+                
+                // Recogemos los datos del turismo, guardamos en un objeto
+                juego.setId_juego(res.getInt("id_juego"));
+                juego.setNombre_juego(res.getString("nombre_juego"));
+                juego.setSistema_operativo(res.getString("sistema_operativo"));
+                juego.setTipo(res.getString("tipo"));
+                juego.setTipo(res.getString("descripcion"));
+                juego.setPegi(res.getInt("pegi"));
+                juego.setPrecio(res.getDouble("precio"));
+                //Añadimos el objeto al array
+                
+            }
+            // Cerramos el recurso PreparedStatement 
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas durante la consulta en tabla Juegos");
+            System.out.println(e);
+        }
+
+        return juego;
+        
+    }
+    
+    
 
     public static int delete_juego(int juego) {
 

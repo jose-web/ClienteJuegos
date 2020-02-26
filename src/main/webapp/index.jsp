@@ -11,18 +11,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cliente Juegos</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
 
-        <%
-            //LocalDate fecha = LocalDate.of(1988, 04, 13);
-            // UsuarioDAO.insertar_usuario("jose", "1234", fecha, 2.36, "joselito");
-
-            //JuegoDAO.insertar_usuario("Gris", "w", "rol", "Seguir una historia", 6, 45.99);
-            //out.print(UsuarioDAO.login_Usuario("jose", "1234"));
-            //out.print(JuegoDAO.delete_juego(5));
-        %>
+        <form action="./Login" method="POST">
+            <table>
+                <tr>
+                    <td><label for="usuarioLogin">Usuario:</label></td>
+                    <td><input type="text" name="usuarioLogin" id="usuarioLogin" required></td>
+                </tr>
+                <tr>
+                    <td><label for="passLogin">Contraseña</label></td>
+                    <td><input type="password" name="passLogin" id="passLogin" required></td>
+                </tr>
+                <tr>
+                    <td><button name="entrar" value="entrar" type="submit"> Entrar</button></td>
+                    <td><button name="registrarse" value="registrarse" onclick="registro()"> Registrarse</button></td>
+                </tr>
+            </table>
+        </form>
+        
+        <script src="js/script.js"></script>
     </body>
 </html>

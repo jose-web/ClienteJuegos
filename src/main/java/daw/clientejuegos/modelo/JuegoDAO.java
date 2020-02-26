@@ -20,7 +20,7 @@ public class JuegoDAO {
 
     private static final Connection CONEXION = Conexion.getInstance();
 
-    public static void insertar_usuario(
+    public static void insertar_juego(
             String nombre_juego,
             String sistema_operativo,
             String tipo,

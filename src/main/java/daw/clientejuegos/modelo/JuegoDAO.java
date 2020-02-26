@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -18,8 +17,9 @@ import java.util.ArrayList;
  * @author Rosa
  */
 public class JuegoDAO {
-     private static final Connection CONEXION = Conexion.getInstance();
-    
+
+    private static final Connection CONEXION = Conexion.getInstance();
+
     public static void insertar_usuario(
             String nombre_juego,
             String sistema_operativo,
@@ -51,30 +51,28 @@ public class JuegoDAO {
             System.out.println(e);
         }
     }
-    
-    
-     public static ArrayList<JuegoVO> consultarJuegos(){
+
+    public static ArrayList<JuegoVO> consultarJuegos() {
         Statement st;
         ResultSet res;
         ArrayList<JuegoVO> lista = new ArrayList();
-        
+
         // Guardo la consulta SQL realizar en una cadena
-        String sql="select * from juego";
+        String sql = "select * from juego";
 
         try {
-            
+
             // Preparamos Statement
-            st = CONEXION.createStatement(); 
+            st = CONEXION.createStatement();
             // Ejecutamos la sentencia y obtenemos la tabla resultado
             res = st.executeQuery(sql);
             // Ahora construimos la lista
-            while (res.next()){
+            while (res.next()) {
                 JuegoVO j = new JuegoVO();
                 // Recogemos los datos del turismo, guardamos en un objeto
                 j.setNombre_juego(res.getString("nombre_juego"));
                 j.setSistema_operativo(res.getString("sistema_operativo"));
                 j.setPegi(res.getInt("pegi"));
-                
 
                 //Añadimos el objeto al array
                 lista.add(j);
@@ -84,35 +82,33 @@ public class JuegoDAO {
 
         } catch (SQLException e) {
             System.out.println("Problemas durante la consulta en tabla Jugadores");
-            System.out.println(e); 
+            System.out.println(e);
         }
 
-        return lista;  
+        return lista;
     }
-     
-    public static ArrayList<JuegoVO> consultarJuegosFiltro(String columna, String valor){
+
+    public static ArrayList<JuegoVO> consultarJuegosFiltro(String columna, String valor) {
         Statement st;
         ResultSet res;
         ArrayList<JuegoVO> lista = new ArrayList();
-        
+
         // Guardo la consulta SQL realizar en una cadena
-        String sql="select * from juego where "+columna+"='"+valor+"'";
+        String sql = "select * from juego where " + columna + "='" + valor + "'";
 
         try {
-            
-            
+
             // Preparamos Statement
-            st = CONEXION.createStatement(); 
+            st = CONEXION.createStatement();
             // Ejecutamos la sentencia y obtenemos la tabla resultado
             res = st.executeQuery(sql);
             // Ahora construimos la lista
-            while (res.next()){
+            while (res.next()) {
                 JuegoVO j = new JuegoVO();
                 // Recogemos los datos del turismo, guardamos en un objeto
                 j.setNombre_juego(res.getString("nombre_juego"));
                 j.setSistema_operativo(res.getString("sistema_operativo"));
                 j.setPegi(res.getInt("pegi"));
-                
 
                 //Añadimos el objeto al array
                 lista.add(j);
@@ -122,29 +118,30 @@ public class JuegoDAO {
 
         } catch (SQLException e) {
             System.out.println("Problemas durante la consulta en tabla Jugadores");
-            System.out.println(e); 
+            System.out.println(e);
         }
 
-        return lista;  
+        return lista;
     }
-    
-    public static  int delete_juego(int juego) throws SQLException {
-        
-        int numFilas = 0;
-        
-        
+
+    public static int delete_juego(int juego) {
+
+        int numFilas = -1;
+
         String sql = "delete from juego where id_juego = ?";
 
         // Sentencia parametrizada
-        try (PreparedStatement prest = CONEXION.prepareStatement(sql)) {
-
+        try {
+            PreparedStatement prest = CONEXION.prepareStatement(sql);
             // Establecemos los parámetros de la sentencia
             prest.setInt(1, juego);
             // Ejecutamos la sentencia
             numFilas = prest.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Problemas durante el borrado en la tabla juego");
+            System.out.println(e);
         }
         return numFilas;
     }
 
-     
 }

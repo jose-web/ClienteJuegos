@@ -151,9 +151,10 @@ public class JuegoDAO {
                 juego.setNombre_juego(res.getString("nombre_juego"));
                 juego.setSistema_operativo(res.getString("sistema_operativo"));
                 juego.setTipo(res.getString("tipo"));
-                juego.setTipo(res.getString("descripcion"));
+                juego.setDescripcion(res.getString("descripcion"));
                 juego.setPegi(res.getInt("pegi"));
                 juego.setPrecio(res.getDouble("precio"));
+                juego.setImg(res.getString("img"));
                 //Añadimos el objeto al array
                 
             }

@@ -70,9 +70,14 @@ public class JuegoDAO {
             while (res.next()) {
                 JuegoVO j = new JuegoVO();
                 // Recogemos los datos del turismo, guardamos en un objeto
+                j.setId_juego(res.getInt("id_juego"));
                 j.setNombre_juego(res.getString("nombre_juego"));
                 j.setSistema_operativo(res.getString("sistema_operativo"));
+                j.setTipo(res.getString("tipo"));
+                j.setDescripcion(res.getString("descripcion"));
                 j.setPegi(res.getInt("pegi"));
+                j.setPrecio(res.getDouble("precio"));
+                j.setImg(res.getString("img"));
 
                 //Añadimos el objeto al array
                 lista.add(j);

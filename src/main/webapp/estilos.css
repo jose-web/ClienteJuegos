@@ -1,0 +1,59 @@
+            body{
+               background: rgb(0,0,0);
+                background: -moz-linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
+                background: -webkit-linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
+                background: linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#390979",GradientType=1);
+                display:flex;
+                flex-direction:column;
+              
+            }
+            h1{
+                color:white;
+            }
+            
+            #contenido{
+                display:flex;
+                flex-direction: row;
+                flex-wrap:wrap;
+                justify-content: space-around;
+            }
+            .hijo{
+            
+                flex:0 30%;
+                margin:1em;
+                background-color: #620D93;
+                border-radius: 0.5em;
+            }
+              .boton{
+                display:flex;
+                width:100%;
+                flex-direction:row;
+                flex-wrap:wrap;
+                background-color: transparent;
+                border:0;
+                
+            }
+            .imagen{
+                flex:100%;
+                height: 20em;
+                
+
+            }
+            .hijo img{
+                width:100%;
+                height: 100%;
+            }
+          
+            p{
+                color:white;
+                font-family:monospace;
+                font-weight: bold;
+                font-size:1.5em;
+
+                
+            }
+            .precio{
+                margin-left: auto;
+                
+            }

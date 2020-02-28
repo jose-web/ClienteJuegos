@@ -16,7 +16,24 @@
     </head>
     <body>
         
-            <header></header>
+    <header>
+         <form action="./Login" method="post">
+            <table>
+                <tr>
+                    <td><label for="nicknameLogin">Nickname:</label></td>
+                    <td><input type="text" name="nicknameLogin" id="nicknameLogin" required></td>
+                </tr>
+                <tr>
+                    <td><label for="passLogin">Contraseña</label></td>
+                    <td><input type="password" name="passLogin" id="passLogin" required></td>
+                </tr>
+                <tr>
+                    <td><button name="entrar" value="entrar" type="submit"> Entrar</button></td>
+                    <td><button name="registrarse" value="registrarse" onclick="registro()"> Registrarse</button></td>
+                </tr>
+            </table>
+        </form>
+    </header>
              <h1>Cliente Juegos</h1>
             <div id="contenido">
                 <%

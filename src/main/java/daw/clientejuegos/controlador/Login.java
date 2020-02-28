@@ -9,7 +9,6 @@ import daw.clientejuegos.modelo.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,9 @@ public class Login extends HttpServlet {
         try {
 
             if ("registrarse".equals(request.getParameter("registrarse"))) {
-                out.print("Registro");
+                RequestDispatcher rd = request.getRequestDispatcher("./registro.jsp");
+                rd.forward(request, response);
+
             } else if ("entrar".equals(request.getParameter("entrar"))) {
                 int login = UsuarioDAO.login_Usuario(request.getParameter("nicknameLogin"), request.getParameter("passLogin"));
                 switch (login) {

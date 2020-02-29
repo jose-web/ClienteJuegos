@@ -26,7 +26,12 @@
 
             if (usuario != null) {
                 out.print("<div> Hola " + usuario.getNombre() + "(" + usuario.getNickname() + ") Tienes un saldo de " + usuario.getSaldo() + "€</div>");
-            } else {
+        %>
+        <form action="./Login" method="post">
+            <button name="cerrarSesion" value="cerrarSesion"> Cerrar sesión</button>
+        </form>
+        <%
+        } else {
         %>
         <form action="./Login" method="post">
             <table>

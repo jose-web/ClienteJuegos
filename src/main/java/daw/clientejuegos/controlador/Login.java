@@ -43,20 +43,21 @@ public class Login extends HttpServlet {
                 rd.forward(request, response);
 
             } else if ("entrar".equals(request.getParameter("entrar"))) {
+                HttpSession sesion = request.getSession(true);
+                sesion.setAttribute("error", -1);
+
                 int login = UsuarioDAO.login_Usuario(request.getParameter("nicknameLogin"), request.getParameter("passLogin"));
                 switch (login) {
                     case -1:
-                        out.print("error");
+                        sesion.setAttribute("error", 0);
                         break;
                     case 0:
-                        out.print("No está registrado :(");
+                        sesion.setAttribute("error", 1);
                         break;
                     case 1:
-
                         UsuarioVO usuarioLogin = UsuarioDAO.busca_usuario_nickcame(request.getParameter("nicknameLogin"));
 
                         if (usuarioLogin.getPass() != null && usuarioLogin.getPass().equals(UsuarioDAO.toMd5(request.getParameter("passLogin")))) {
-                            HttpSession sesion = request.getSession(true);
                             sesion.setAttribute("usuario", usuarioLogin);
                         }
                         break;

@@ -32,6 +32,20 @@
         </form>
         <%
         } else {
+            if (sesion.getAttribute("error") != null) {
+                int error = Integer.parseInt(sesion.getAttribute("error").toString());
+                if (error != -1) {
+                    switch (error) {
+                        case 0:
+                            out.print("Ha oocurrido un error");
+                            break;
+                        case 1:
+                            out.print("Este usuario no está en la base de datos");
+                            break;
+                    }
+                    sesion.setAttribute("error", -1);
+                }
+            }
         %>
         <form action="./Login" method="post">
             <table>
@@ -67,7 +81,6 @@
                 out.print("</form>");
             }
         %>
-
     </div>
 
     <script src="js/script.js"></script>

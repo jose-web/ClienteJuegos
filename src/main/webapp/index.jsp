@@ -37,7 +37,7 @@
                 if (error != -1) {
                     switch (error) {
                         case 0:
-                            out.print("Ha oocurrido un error");
+                            out.print("Ha ocurrido un error con la base de datos");
                             break;
                         case 1:
                             out.print("Este usuario no está en la base de datos");
@@ -70,16 +70,21 @@
     <h1>Cliente Juegos</h1>
     <div id="contenido">
         <%
-            ArrayList<JuegoVO> juegos = JuegoDAO.consultarJuegos();
-            for (JuegoVO juego : juegos) {
-                out.print("<form method='post' action='./Juego' class='hijo'>");
-                out.print("<button class='boton' name='juego' value='" + juego.getId_juego() + "'>");
-                out.print("<div class='imagen'><img src='img/" + juego.getImg() + "'></div>");
-                out.print("<p class='nombre'>" + juego.getNombre_juego() + "</p>");
-                out.print("<p class='precio'>" + juego.getPrecio() + "</p>");
-                out.print("</button>");
-                out.print("</form>");
+            try {
+                ArrayList<JuegoVO> juegos = JuegoDAO.consultarJuegos();
+                for (JuegoVO juego : juegos) {
+                    out.print("<form method='post' action='./Juego' class='hijo'>");
+                    out.print("<button class='boton' name='juego' value='" + juego.getId_juego() + "'>");
+                    out.print("<div class='imagen'><img src='img/" + juego.getImg() + "'></div>");
+                    out.print("<p class='nombre'>" + juego.getNombre_juego() + "</p>");
+                    out.print("<p class='precio'>" + juego.getPrecio() + "</p>");
+                    out.print("</button>");
+                    out.print("</form>");
+                }
+            } catch (java.lang.NullPointerException n) {
+                out.print("<p>No se ha podido conectar con la base de datos</p>");
             }
+
         %>
     </div>
 

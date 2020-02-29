@@ -8,7 +8,6 @@ package daw.clientejuegos.controlador;
 import daw.clientejuegos.modelo.UsuarioDAO;
 import daw.clientejuegos.modelo.UsuarioVO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,17 +34,15 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
 
-            if ("registrarse".equals(request.getParameter("registrarse"))) {
-                RequestDispatcher rd = request.getRequestDispatcher("./registro.jsp");
-                rd.forward(request, response);
+        if ("registrarse".equals(request.getParameter("registrarse"))) {
+            RequestDispatcher rd = request.getRequestDispatcher("./registro.jsp");
+            rd.forward(request, response);
 
-            } else if ("entrar".equals(request.getParameter("entrar"))) {
-                HttpSession sesion = request.getSession(true);
-                sesion.setAttribute("error", -1);
-
+        } else if ("entrar".equals(request.getParameter("entrar"))) {
+            HttpSession sesion = request.getSession(true);
+            sesion.setAttribute("error", -1);
+            try {
                 int login = UsuarioDAO.login_Usuario(request.getParameter("nicknameLogin"), request.getParameter("passLogin"));
                 switch (login) {
                     case -1:
@@ -62,18 +59,18 @@ public class Login extends HttpServlet {
                         }
                         break;
                 }
-            } else if ("cerrarSesion".equals(request.getParameter("cerrarSesion"))) {
-                HttpSession sesion = request.getSession(true);
-                sesion.setAttribute("usuario", null);
+            } catch (Exception n) {
+                sesion.setAttribute("error", 0);
             }
-
-            ServletContext contexto = request.getServletContext();
-            RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
-            despachador.forward(request, response);
-
-        } finally {
-            out.close();
+        } else if ("cerrarSesion".equals(request.getParameter("cerrarSesion"))) {
+            HttpSession sesion = request.getSession(true);
+            sesion.setAttribute("usuario", null);
         }
+
+        ServletContext contexto = request.getServletContext();
+        RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
+        despachador.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

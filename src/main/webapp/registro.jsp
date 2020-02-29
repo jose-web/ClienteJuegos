@@ -23,7 +23,7 @@
                 background: linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#390979",GradientType=1);
                 background-attachment: fixed;
-                height:100vh;
+                min-height:100vh;
                 display:flex;
                 justify-content: center;
                 align-items: center;

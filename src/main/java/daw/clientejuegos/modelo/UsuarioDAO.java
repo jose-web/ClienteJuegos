@@ -54,7 +54,7 @@ public class UsuarioDAO {
         }
     }
 
-    private static String toMd5(String input) {
+    public static String toMd5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());

@@ -6,13 +6,16 @@
 package daw.clientejuegos.controlador;
 
 import daw.clientejuegos.modelo.UsuarioDAO;
+import daw.clientejuegos.modelo.UsuarioVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -49,7 +52,17 @@ public class Login extends HttpServlet {
                         out.print("No está registrado :(");
                         break;
                     case 1:
-                        out.print("Bienvenido/a");
+
+                        UsuarioVO usuarioLogin = UsuarioDAO.busca_usuario_nickcame(request.getParameter("nicknameLogin"));
+
+                        if (usuarioLogin.getPass() != null && usuarioLogin.getPass().equals(UsuarioDAO.toMd5(request.getParameter("passLogin")))) {
+                            HttpSession sesion = request.getSession(true);
+                            sesion.setAttribute("usuario", usuarioLogin);
+                        }
+
+                        ServletContext contexto = request.getServletContext();
+                        RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
+                        despachador.forward(request, response);
                         break;
                 }
             }

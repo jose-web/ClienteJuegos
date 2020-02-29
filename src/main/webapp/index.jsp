@@ -17,6 +17,17 @@
     <body>
 
     <header>
+        <%
+
+            HttpSession sesion = request.getSession(true);
+            // int usuario = Integer.parseInt(sesion.getAttribute("idUsuario").toString());
+
+            UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+
+            if (usuario != null) {
+                out.print("<div> Hola " + usuario.getNombre() + "(" + usuario.getNickname() + ") Tienes un saldo de " + usuario.getSaldo() + "€</div>");
+            } else {
+        %>
         <form action="./Login" method="post">
             <table>
                 <tr>
@@ -33,23 +44,14 @@
                 </tr>
             </table>
         </form>
+        <%
+            }
+        %>
     </header>
     <h1>Cliente Juegos</h1>
-    <%
-
-        HttpSession sesion = request.getSession(true);
-        // int usuario = Integer.parseInt(sesion.getAttribute("idUsuario").toString());
-
-        UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
-
-        if (usuario != null) {
-            out.print("<span style='color:white'> Hola " + usuario.getNombre() + "(" + usuario.getNickname() + ") Tienes un saldo de " + usuario.getSaldo() + "€</span>");
-        }
-
-    %>
-
     <div id="contenido">
-        <%                    ArrayList<JuegoVO> juegos = JuegoDAO.consultarJuegos();
+        <%
+            ArrayList<JuegoVO> juegos = JuegoDAO.consultarJuegos();
             for (JuegoVO juego : juegos) {
                 out.print("<form method='post' action='./Juego' class='hijo'>");
                 out.print("<button class='boton' name='juego' value='" + juego.getId_juego() + "'>");
@@ -59,7 +61,6 @@
                 out.print("</button>");
                 out.print("</form>");
             }
-
         %>
 
     </div>

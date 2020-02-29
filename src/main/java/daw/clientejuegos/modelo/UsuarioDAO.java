@@ -12,13 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Rosa
  */
-
 public class UsuarioDAO {
 
     private static final Connection CONEXION = Conexion.getInstance();
@@ -87,7 +88,7 @@ public class UsuarioDAO {
             if (res.next()) {
                 resultado = res.getInt("cuentaUsuario");
             }
-            
+
             prest.close();
 
         } catch (SQLException e) {
@@ -96,5 +97,40 @@ public class UsuarioDAO {
         }
 
         return resultado;
+    }
+
+    public static UsuarioVO busca_usuario_nickcame(String nickname) {
+        Statement st;
+        ResultSet res;
+
+        String sql = "select * from usuario where nickname='" + nickname + "'";
+
+        UsuarioVO usuario = new UsuarioVO();
+        try {
+
+            st = CONEXION.createStatement();
+
+            res = st.executeQuery(sql);
+            if (res.next()) {
+                usuario.setId_usuario(res.getInt("id_usuario"));
+                usuario.setNombre(res.getString("nombre"));
+                usuario.setSaldo(res.getDouble("saldo"));
+                usuario.setNickname(res.getString("nickname"));
+                usuario.setPass(res.getString("password"));
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate fechaNueva = LocalDate.parse(res.getString("fecha_nacimiento"), formatter);
+
+                usuario.setFecha_nacimiento(fechaNueva);
+            }
+            // Cerramos el recurso PreparedStatement 
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas durante la consulta en tabla Usuario");
+            System.out.println(e);
+        }
+
+        return usuario;
     }
 }

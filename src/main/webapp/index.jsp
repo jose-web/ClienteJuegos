@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="estilos.css"/>
     </head>
     <body>
-        
+
     <header>
-         <form action="./Login" method="post">
+        <form action="./Login" method="post">
             <table>
                 <tr>
                     <td><label for="nicknameLogin">Nickname:</label></td>
@@ -34,45 +34,36 @@
             </table>
         </form>
     </header>
-             <h1>Cliente Juegos</h1>
-            <div id="contenido">
-                <%
-                    ArrayList<JuegoVO> juegos=JuegoDAO.consultarJuegos();
-                    for (JuegoVO juego : juegos) {
-                            out.print("<form method='post' action='juego.jsp' class='hijo'>");
-                            out.print("<button class='boton' name='juego' value='"+juego.getId_juego()+"'>");
-                            out.print("<div class='imagen'><img src='img/"+juego.getImg()+"'></div>");
-                            out.print("<p class='nombre'>"+juego.getNombre_juego()+"</p>");
-                            out.print("<p class='precio'>"+juego.getPrecio()+"</p>");
-                            out.print("</button>");
-                            out.print("</form>");
-                        }
+    <h1>Cliente Juegos</h1>
+    <%
 
-                %>
-                
-            </div>
-        
-        <script src="js/script.js"></script>
+        HttpSession sesion = request.getSession(true);
+        // int usuario = Integer.parseInt(sesion.getAttribute("idUsuario").toString());
 
-        <%
-            //LocalDate fecha = LocalDate.of(1988, 04, 13);
-           // UsuarioDAO.insertar_usuario("Rosa", "1234", fecha, 2.36, "Mirusa");
+        UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
 
-            //JuegoDAO.insertar_usuario("Gris", "w", "rol", "Seguir una historia", 6, 45.99);
+        if (usuario != null) {
+            out.print("<span style='color:white'> Hola " + usuario.getNombre() + "(" + usuario.getNickname() + ") Tienes un saldo de " + usuario.getSaldo() + "€</span>");
+        }
 
-            //out.print(UsuarioDAO.login_Usuario("jose", "1234"));
-            //out.print(JuegoDAO.delete_juego(5));
+    %>
 
-           // out.print(UsuarioDAO.login_Usuario("jose", "1234"));
-            
-            //ArrayList<JuegoVO> lista=JuegoDAO.consultarJuegosFiltro("precio","34.20");
-           // for (JuegoVO juegoVO : lista) {
-              //      out.print(juegoVO+"<br/>");
-               // }
-            
-               // out.print(JuegoDAO.delete_juego(4));
-              // out.print(JuegoDAO.buscar_juego(9));
+    <div id="contenido">
+        <%                    ArrayList<JuegoVO> juegos = JuegoDAO.consultarJuegos();
+            for (JuegoVO juego : juegos) {
+                out.print("<form method='post' action='./Juego' class='hijo'>");
+                out.print("<button class='boton' name='juego' value='" + juego.getId_juego() + "'>");
+                out.print("<div class='imagen'><img src='img/" + juego.getImg() + "'></div>");
+                out.print("<p class='nombre'>" + juego.getNombre_juego() + "</p>");
+                out.print("<p class='precio'>" + juego.getPrecio() + "</p>");
+                out.print("</button>");
+                out.print("</form>");
+            }
+
         %>
 
-    </body>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
 </html>

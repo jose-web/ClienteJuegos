@@ -6,6 +6,7 @@
 package daw.clientejuegos.controlador;
 
 import daw.clientejuegos.modelo.UsuarioDAO;
+import daw.clientejuegos.modelo.UsuarioVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -13,10 +14,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,13 +42,7 @@ public class Registro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Registro</title>");
-            out.println("</head>");
-            out.println("<body>");
+
             String nombre = request.getParameter("nombre");
             String pass = request.getParameter("pass");
             String nickname = request.getParameter("nickname");
@@ -65,17 +63,24 @@ public class Registro extends HttpServlet {
                 out.println("usuario no insertado porque es menor de edad");
 
             } else {
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-                //convert String to LocalDate
                 LocalDate fechaNueva = LocalDate.parse(fecnac, formatter);
-
                 UsuarioDAO.insertar_usuario(nombre, pass, fechaNueva, 0, nickname);
-                out.println("usuario insertado");
+
+                HttpSession sesion = request.getSession(true);
+                UsuarioVO usuario = UsuarioDAO.busca_usuario_nickcame(nickname);
+
+                sesion.setAttribute("usuario", usuario);
+
+                ServletContext contexto = request.getServletContext();
+
+                RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
+
+                despachador.forward(request, response);
             }
 
-            out.println("</body>");
-            out.println("</html>");
         } finally {
             out.close();
         }

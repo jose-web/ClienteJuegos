@@ -17,17 +17,21 @@ public class UsuarioVO {
     private String nombre;
     private LocalDate fecha_nacimiento;
     private String nickname;
+    private double saldo;
+    private String pass;
 
     // Constructor por defecto
     public UsuarioVO() {
     }
 
     // Constructor parametrizado
-    public UsuarioVO(int id_usuario, String nombre, LocalDate fecha_nacimiento, String nickname) {
+    public UsuarioVO(int id_usuario, String nombre, LocalDate fecha_nacimiento, String nickname, double saldo, String pass) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.fecha_nacimiento = fecha_nacimiento;
         this.nickname = nickname;
+        this.saldo = saldo;
+        this.pass = pass;
     }
 
     // Getters
@@ -47,6 +51,14 @@ public class UsuarioVO {
         return nickname;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
     // Setters
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
@@ -64,10 +76,18 @@ public class UsuarioVO {
         this.nickname = nickname;
     }
 
-    // ToString
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+     // ToString
     @Override
     public String toString() {
-        return "UsuarioVO{" + "id_usuario=" + id_usuario + ", nombre=" + nombre + ", fecha_nacimiento=" + fecha_nacimiento + ", nickname=" + nickname + '}';
+        return "UsuarioVO{" + "id_usuario=" + id_usuario + ", nombre=" + nombre + ", fecha_nacimiento=" + fecha_nacimiento + ", nickname=" + nickname + ", saldo=" + saldo + ", pass=" + pass + '}';
     }
 
 }

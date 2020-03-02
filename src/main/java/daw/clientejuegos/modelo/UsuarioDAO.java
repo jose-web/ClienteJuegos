@@ -13,8 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.sql.Date;
 
 /**
  *
@@ -133,4 +136,29 @@ public class UsuarioDAO {
 
         return usuario;
     }
+
+    public static int updateUsuario(String nombre, String password, LocalDate Fecha, String nick, int id) {
+
+        String existe_pass = "".equals(password) ? "" : ", password=?";
+        String sql = "update usuario set nombre = ?,fecha_nacimiento = ?, nickname=?" + existe_pass + "  where id_usuario=" + id;
+
+        try {
+            PreparedStatement prest = CONEXION.prepareStatement(sql);
+            // Establecemos los parámetros de la sentencia
+            prest.setString(1, nombre);
+            prest.setObject(2, Fecha);
+            prest.setString(3, nick);
+            if (!"".equals(password)) {
+                prest.setString(4, toMd5(password));
+            }
+
+            //return prest.toString();
+            prest.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return -1;
+        }
+
+    }
+
 }

@@ -5,8 +5,15 @@
  */
 package daw.clientejuegos.controlador;
 
+import daw.clientejuegos.modelo.UsuarioDAO;
+import daw.clientejuegos.modelo.UsuarioVO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,23 +42,47 @@ public class PerfilEdicion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         ServletContext contexto = request.getServletContext();
+
         RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
 
         try {
             HttpSession sesion = request.getSession(true);
             String editar_perfil = request.getParameter("editar_perfil");
             if ("editar_perfil".equals(editar_perfil)) {
-             despachador = contexto.getRequestDispatcher("/editarPerfil.jsp");
+                despachador = contexto.getRequestDispatcher("/editarPerfil.jsp");
             }
-            String subir_cambios=request.getParameter("subir_cambios");
-            String nombre_edit=request.getParameter("nombre");
-            String fecha_edit=request.getParameter("fecha");
-            String nick_edit=request.getParameter("nick");
-            
-            boolean error="".equals(nombre_edit)||"".equals(fecha_edit)||"".equals(nick_edit);
-            
-            
+            String subir_cambios = request.getParameter("subir_cambios");
+            if (subir_cambios != null) {
+                String nombre_edit = request.getParameter("nombre");
+                String pass_edit = request.getParameter("clave");
+                String fecha_edit = request.getParameter("fecha");
 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                LocalDate fechaNueva = LocalDate.parse(fecha_edit, formatter);
+
+                String nick_edit = request.getParameter("nick");
+                UsuarioVO usu = (UsuarioVO) sesion.getAttribute("usuario");
+                int id_usu = usu.getId_usuario();
+                /*
+            sesion.setAttribute("id_usuario", id_usu);
+            sesion.setAttribute("nom_usuario", nombre_edit);
+            sesion.setAttribute("pass_usuario", pass_edit);
+            sesion.setAttribute("fecha_usuario", fechaNueva);
+            sesion.setAttribute("nick_usuario", nick_edit);*/
+                boolean error = "".equals(nombre_edit) || "".equals(fecha_edit) || "".equals(nick_edit);
+                despachador = contexto.getRequestDispatcher("/editarPerfil.jsp");
+                if (!error) {
+                    int resp = UsuarioDAO.updateUsuario(nombre_edit, pass_edit, fechaNueva, nick_edit, id_usu);
+
+                    sesion.setAttribute("error_edicion", resp);
+                    despachador = contexto.getRequestDispatcher("/editarPerfil.jsp");
+                    UsuarioVO usuarioLogin = UsuarioDAO.busca_usuario_nickcame(nick_edit);
+                    sesion.setAttribute("usuario", usuarioLogin);
+
+                }
+
+            }
 
             despachador.forward(request, response);
         } finally {

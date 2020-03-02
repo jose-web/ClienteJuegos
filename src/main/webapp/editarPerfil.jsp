@@ -25,6 +25,20 @@
             %>
             <form method="post" action="./PerfilEdicion">
                 <h1>Edición del perfil</h1>
+                <%
+                   if(sesion.getAttribute("error_edicion")!=null){
+                       switch (Integer.parseInt(sesion.getAttribute("error_edicion").toString())) {
+                               case 1:
+                                   out.print("Se ha actualizado correctamente");
+                                   break;
+                                    case -1:
+                                   out.print("Ha ocurrido un error con la base de datos");
+                                   break;
+                               
+                           }
+                   } 
+
+                  %>
                 <table>
                     <tr>
                         <td>
@@ -60,6 +74,8 @@
                     </tr>
                 </table>
                  <input type="submit" name="subir_cambios" value="Subir Cambios"/>
+                 <br/>
+                 <a href="index.jsp">Volver</a>
             </form>
     </body>
 </html>

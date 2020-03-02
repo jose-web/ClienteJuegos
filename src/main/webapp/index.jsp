@@ -18,7 +18,6 @@
 
     <header>
         <%
-
             HttpSession sesion = request.getSession(true);
             // int usuario = Integer.parseInt(sesion.getAttribute("idUsuario").toString());
 
@@ -30,9 +29,11 @@
         <form action="./Login" method="post">
             <button name="cerrarSesion" value="cerrarSesion"> Cerrar sesión</button>
         </form>
+        <form method="post" action="./biblioteca.jsp">
+            <button>Ver biblioteca</button>
+        </form>
         <%
-          
-          out.print("<form method='post' action='editarPerfil.jsp'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
+            out.print("<form method='post' action='editarPerfil.jsp'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
         } else {
             if (sesion.getAttribute("error") != null) {
                 int error = Integer.parseInt(sesion.getAttribute("error").toString());

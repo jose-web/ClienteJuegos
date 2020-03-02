@@ -75,6 +75,6 @@
         <%
             }
         %>
-        <p><a href='index.jsp'>Volver</a><p>
+        <p><a href='index.jsp'>Volver</a></p>
     </body>
 </html>

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -93,5 +94,38 @@ public class BibliotecaDAO {
             return false;
         }
         return false;
+    }
+
+    public static ArrayList<JuegoVO> verBiblioteca(int idUsuario) {
+        Statement st;
+        ResultSet res;
+
+        String sql = "select juego.* from biblioteca join juego on biblioteca.id_juego = juego.id_juego where id_usuario =" + idUsuario;
+
+        ArrayList<JuegoVO> lista = new ArrayList();
+
+        try {
+            st = CONEXION.createStatement();
+            res = st.executeQuery(sql);
+
+            while (res.next()) {
+                JuegoVO j = new JuegoVO();
+
+                j.setId_juego(res.getInt("id_juego"));
+                j.setNombre_juego(res.getString("nombre_juego"));
+                j.setSistema_operativo(res.getString("sistema_operativo"));
+                j.setTipo(res.getString("tipo"));
+                j.setDescripcion(res.getString("descripcion"));
+                j.setPegi(res.getInt("pegi"));
+                j.setPrecio(res.getDouble("precio"));
+                j.setImg(res.getString("img"));
+
+                lista.add(j);
+            }
+
+        } catch (SQLException e) {
+            return lista;
+        }
+        return lista;
     }
 }

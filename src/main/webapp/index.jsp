@@ -33,7 +33,7 @@
             <button>Ver biblioteca</button>
         </form>
         <%
-            out.print("<form method='post' action='editarPerfil.jsp'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
+            out.print("<form method='post' action='./PerfilEdicion'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
         } else {
             if (sesion.getAttribute("error") != null) {
                 int error = Integer.parseInt(sesion.getAttribute("error").toString());

@@ -5,6 +5,9 @@
  */
 package daw.clientejuegos.controlador;
 
+import daw.clientejuegos.modelo.BibliotecaDAO;
+import daw.clientejuegos.modelo.UsuarioDAO;
+import daw.clientejuegos.modelo.UsuarioVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -32,22 +35,33 @@ public class Juego extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            ServletContext contexto = request.getServletContext();
+        ServletContext contexto = request.getServletContext();
 
-            // Obtengo la sesion de la petición HTTP, si existe. 
-            // Con true, si no está creada se crea
+        try {
             HttpSession sesion = request.getSession(true);
-            String idJuego = request.getParameter("juego");
-            // Asigno ese nombre del visitante al atributo de la sesión y así lo puedo usar en la vista
-            sesion.setAttribute("idJuego", idJuego);
+            String adquirirJuego = request.getParameter("adquirirJuego");
+            if ("adquirirJuego".equals(adquirirJuego)) {
+
+                UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+                UsuarioVO usuarioLogin = UsuarioDAO.busca_usuario_nickcame(usuario.getNickname());
+
+                if (usuario.getPass().equals(usuarioLogin.getPass())) {
+                    int juego = Integer.parseInt(sesion.getAttribute("idJuego").toString());
+                    BibliotecaDAO.comprar_juego(usuario.getId_usuario(), juego);
+
+                    UsuarioVO usuarioActualizado = UsuarioDAO.busca_usuario_nickcame(usuario.getNickname());
+                    sesion.setAttribute("usuario", usuarioActualizado);
+                }
+
+            } else {
+                String idJuego = request.getParameter("juego");
+                sesion.setAttribute("idJuego", idJuego);
+            }
+
             RequestDispatcher despachador = contexto.getRequestDispatcher("/juego.jsp");
-            // El método fordward permite hacer la redirección a otro servlet o a una
-            // vista y se pasa tanto el objeto petición como el objeto respuesta
-            // para que el nuevo recurso pueda hacer uso de ellos
             despachador.forward(request, response);
 
         } finally {

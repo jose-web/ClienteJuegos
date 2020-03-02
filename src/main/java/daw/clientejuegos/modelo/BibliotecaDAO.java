@@ -68,4 +68,30 @@ public class BibliotecaDAO {
         }
         return 1;
     }
+
+    public static boolean usuario_tiene_juego(int idUsuario, int idJuego) {
+        Statement st;
+        ResultSet res;
+
+        String sql = "select count(*) as contador from biblioteca where id_usuario=" + idUsuario + " and id_juego=" + idJuego;
+
+        try {
+            st = CONEXION.createStatement();
+            res = st.executeQuery(sql);
+
+            if (res.next()) {
+                if (res.getInt("contador") == 1) {
+                    st.close();
+                    return true;
+                } else {
+                    st.close();
+                    return false;
+                }
+            }
+
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
+    }
 }

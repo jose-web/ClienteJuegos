@@ -64,15 +64,19 @@
             out.print("<p>Pegi: " + juego.getPegi() + "</p>");
 
             HttpSession sesion = request.getSession(true);
-            UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
-            if (BibliotecaDAO.usuario_tiene_juego(usuario.getId_usuario(), idJuego)) {
-                out.print("Ya tienes este juego");
-            } else {
+            if (sesion.getAttribute("usuario") != null) {
+                UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+                if (BibliotecaDAO.usuario_tiene_juego(usuario.getId_usuario(), idJuego)) {
+                    out.print("Ya tienes este juego");
+                } else {
         %>   
         <form method="post" action="./Juego">
             <button name="adquirirJuego" value="adquirirJuego">Adquirir Juego</button>
         </form>
         <%
+                }
+            } else {
+                out.print("Debes estar registrado para comprar este producto");
             }
         %>
         <p><a href='index.jsp'>Volver</a></p>

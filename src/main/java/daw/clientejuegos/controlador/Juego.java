@@ -58,11 +58,15 @@ public class Juego extends HttpServlet {
 
             } else {
                 String idJuego = request.getParameter("juego");
-                sesion.setAttribute("idJuego", idJuego);
+                if (idJuego != null) {
+                    sesion.setAttribute("idJuego", idJuego);
+                } else {
+                    RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
+                    despachador.forward(request, response);
+                }
             }
 
-            RequestDispatcher despachador = contexto.getRequestDispatcher("/juego.jsp");
-            despachador.forward(request, response);
+
 
         } finally {
             out.close();

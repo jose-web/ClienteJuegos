@@ -43,6 +43,7 @@ public class Juego extends HttpServlet {
         try {
             HttpSession sesion = request.getSession(true);
             String adquirirJuego = request.getParameter("adquirirJuego");
+            RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
             if ("adquirirJuego".equals(adquirirJuego)) {
 
                 UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
@@ -60,14 +61,12 @@ public class Juego extends HttpServlet {
                 String idJuego = request.getParameter("juego");
                 if (idJuego != null) {
                     sesion.setAttribute("idJuego", idJuego);
+                    despachador = contexto.getRequestDispatcher("/juego.jsp");
                 } else {
-                    RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
-                    despachador.forward(request, response);
+                    despachador = contexto.getRequestDispatcher("/index.jsp");
                 }
             }
-
-
-
+            despachador.forward(request, response);
         } finally {
             out.close();
         }

@@ -70,7 +70,11 @@ public class PerfilEdicion extends HttpServlet {
             sesion.setAttribute("pass_usuario", pass_edit);
             sesion.setAttribute("fecha_usuario", fechaNueva);
             sesion.setAttribute("nick_usuario", nick_edit);*/
-                boolean error = "".equals(nombre_edit) || "".equals(fecha_edit) || "".equals(nick_edit);
+                int repetido=UsuarioDAO.existe_nick(nick_edit, id_usu);
+                if(repetido!=0){
+                    sesion.setAttribute("repetido", repetido);
+                }
+                boolean error = "".equals(nombre_edit) || "".equals(fecha_edit) || "".equals(nick_edit) || repetido!=0;
                 despachador = contexto.getRequestDispatcher("/editarPerfil.jsp");
                 if (!error) {
                     int resp = UsuarioDAO.updateUsuario(nombre_edit, pass_edit, fechaNueva, nick_edit, id_usu);

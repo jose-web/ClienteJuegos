@@ -160,5 +160,26 @@ public class UsuarioDAO {
         }
 
     }
+    
+    public static int existe_nick(String nick, int id_usuario){
+        Statement st;
+        ResultSet res;
+
+        String sql="select count(*) as contador from usuario where nickname='"+nick+"' and id_usuario!="+id_usuario;
+        
+        try {
+    
+            //return prest.toString();
+            st = CONEXION.createStatement();
+
+            res = st.executeQuery(sql);
+            res.next();
+           // return sql;
+           return res.getInt("contador");
+            
+        } catch (SQLException e) {
+            return -1;
+        }
+    }
 
 }

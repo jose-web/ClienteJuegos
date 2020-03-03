@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +37,17 @@ public class Admin_juego_creado extends HttpServlet {
 
         ServletContext contexto = request.getServletContext();
         RequestDispatcher despachador = contexto.getRequestDispatcher("/mis_creaciones.jsp");
+
+        if (request.getParameter("editar") != null) {
+
+            HttpSession sesion = request.getSession(true);
+
+            sesion.setAttribute("editar", request.getParameter("editar"));
+
+            RequestDispatcher rd = request.getRequestDispatcher("./editaJuego.jsp");
+            rd.forward(request, response);
+        }
+
         despachador.forward(request, response);
     }
 

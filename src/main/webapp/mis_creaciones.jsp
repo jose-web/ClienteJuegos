@@ -27,14 +27,17 @@
 
         %>
 
+
+        <div class='imagen'><img src='img/<%= juego.getImg()%>'></div>
+        <p class='nombre'> <%=juego.getNombre_juego()%> a </p>
+        <p class='precio'><%=juego.getPrecio()%></p>
         <form method='post' action='./Juego' class='hijo'>
-            <div class='imagen'><img src='img/<%= juego.getImg()%>'></div>
-            <p class='nombre'> <%=juego.getNombre_juego()%> a </p>
-            <p class='precio'><%=juego.getPrecio()%></p>
             <button class='boton' name='juego' value='<%= juego.getId_juego()%>'>
                 Ver
             </button>
-            <button class='boton' name='juego' value='<%= juego.getId_juego()%>'>
+        </form>
+        <form method='post' action='./Admin_juego_creado' class='hijo'>
+            <button class='boton' name='editar' value='<%= juego.getId_juego()%>'>
                 Editar
             </button>
         </form>

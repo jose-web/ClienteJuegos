@@ -128,15 +128,15 @@ public class JuegoDAO {
 
         return lista;
     }
-    
-    public static JuegoVO buscar_juego(int id_juego){
-        
+
+    public static JuegoVO buscar_juego(int id_juego) {
+
         Statement st;
         ResultSet res;
         JuegoVO juego = new JuegoVO();
-        
-                // Guardo la consulta SQL realizar en una cadena
-        String sql = "select * from juego where id_juego="+id_juego;
+
+        // Guardo la consulta SQL realizar en una cadena
+        String sql = "select * from juego where id_juego=" + id_juego;
         try {
 
             // Preparamos Statement
@@ -145,7 +145,7 @@ public class JuegoDAO {
             res = st.executeQuery(sql);
             // Ahora construimos la lista
             while (res.next()) {
-                
+
                 // Recogemos los datos del turismo, guardamos en un objeto
                 juego.setId_juego(res.getInt("id_juego"));
                 juego.setNombre_juego(res.getString("nombre_juego"));
@@ -156,7 +156,7 @@ public class JuegoDAO {
                 juego.setPrecio(res.getDouble("precio"));
                 juego.setImg(res.getString("img"));
                 //Añadimos el objeto al array
-                
+
             }
             // Cerramos el recurso PreparedStatement 
             st.close();
@@ -167,10 +167,8 @@ public class JuegoDAO {
         }
 
         return juego;
-        
+
     }
-    
-    
 
     public static int delete_juego(int juego) {
 
@@ -191,15 +189,14 @@ public class JuegoDAO {
         }
         return numFilas;
     }
-    
-    
+
     public static ArrayList<JuegoVO> consultarJuegosCreados(int id_usuario) {
         Statement st;
         ResultSet res;
         ArrayList<JuegoVO> lista = new ArrayList();
 
         // Guardo la consulta SQL realizar en una cadena
-        String sql = "select juego.* from juego join creado_por on juego.id_juego = creado_por.id_juego where id_usuario ="+id_usuario;
+        String sql = "select juego.* from juego join creado_por on juego.id_juego = creado_por.id_juego where id_usuario =" + id_usuario;
 
         try {
 
@@ -232,6 +229,35 @@ public class JuegoDAO {
         }
 
         return lista;
+    }
+
+    public static int consultarPertenenciaJuegoCreado(int id_usuario, int id_juego) {
+        Statement st;
+        ResultSet res;
+        ArrayList<JuegoVO> lista = new ArrayList();
+
+        // Guardo la consulta SQL realizar en una cadena
+        String sql = "select count(*) as contador from creado_por where id_usuario =" + id_usuario + " and id_juego = " + id_juego;
+
+        try {
+
+            // Preparamos Statement
+            st = CONEXION.createStatement();
+            // Ejecutamos la sentencia y obtenemos la tabla resultado
+            res = st.executeQuery(sql);
+            // Ahora construimos la lista
+            if (res.next()) {
+                return res.getInt("contador");
+            }
+            // Cerramos el recurso PreparedStatement 
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas durante la consulta");
+            System.out.println(e);
+        }
+
+        return -1;
     }
 
 }

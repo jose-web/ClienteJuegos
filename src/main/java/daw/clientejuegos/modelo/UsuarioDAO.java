@@ -181,5 +181,22 @@ public class UsuarioDAO {
             return -1;
         }
     }
+    
+    public static int addSaldo(double saldo,int id_usuario){
+    
+        String sql = "update usuario set saldo = ? where id_usuario=" + id_usuario;
+
+        try {
+            PreparedStatement prest = CONEXION.prepareStatement(sql);
+            // Establecemos los parámetros de la sentencia
+            prest.setDouble(1, saldo);
+
+            //return prest.toString();
+            prest.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            return -1;
+        }
+    }
 
 }

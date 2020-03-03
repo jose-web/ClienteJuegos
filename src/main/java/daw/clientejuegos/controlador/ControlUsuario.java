@@ -65,7 +65,21 @@ public class ControlUsuario extends HttpServlet {
         } else if ("cerrarSesion".equals(request.getParameter("cerrarSesion"))) {
             HttpSession sesion = request.getSession(true);
             sesion.setAttribute("usuario", null);
-        }
+        }else if("saldo".equals(request.getParameter("saldo"))){
+             ServletContext contexto = request.getServletContext();
+            RequestDispatcher despachador = contexto.getRequestDispatcher("/addSaldo.jsp");
+        despachador.forward(request, response);
+        }else if("subirSaldo".equals(request.getParameter("subirSaldo"))){
+            
+            HttpSession sesion = request.getSession(true);
+            UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+            int id_usuario= usuario.getId_usuario();
+            
+          //  String saldo_add= sesion.getAttribute("saldoNuevo").toString();
+         //   double saldo=saldo_add;
+           // UsuarioDAO.addSaldo(saldo_add, id_usuario);
+            
+            }
 
         ServletContext contexto = request.getServletContext();
         RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");

@@ -32,6 +32,9 @@
         <form method="post" action="./biblioteca.jsp">
             <button>Ver biblioteca</button>
         </form>
+        <form method="post" action="./Admin_juego_creado">
+            <button>Mis creaciones</button>
+        </form>
         <%
             out.print("<form method='post' action='./PerfilEdicion'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
         } else {

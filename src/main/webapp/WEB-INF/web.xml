@@ -13,6 +13,10 @@
         <servlet-class>daw.clientejuegos.controlador.Registro</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Admin_juego_creado</servlet-name>
+        <servlet-class>daw.clientejuegos.controlador.Admin_juego_creado</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PerfilEdicion</servlet-name>
         <servlet-class>daw.clientejuegos.controlador.PerfilEdicion</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_juego_creado</servlet-name>
+        <url-pattern>/Admin_juego_creado</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PerfilEdicion</servlet-name>

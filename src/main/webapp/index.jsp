@@ -26,7 +26,7 @@
             if (usuario != null) {
                 out.print("<div> Hola " + usuario.getNombre() + "(" + usuario.getNickname() + ") Tienes un saldo de " + usuario.getSaldo() + "€</div>");
         %>
-        <form action="./Login" method="post">
+        <form action="./ControlUsuario" method="post">
             <button name="cerrarSesion" value="cerrarSesion"> Cerrar sesión</button>
         </form>
         <form method="post" action="./biblioteca.jsp">
@@ -34,6 +34,9 @@
         </form>
         <form method="post" action="./Admin_juego_creado">
             <button>Mis creaciones</button>
+        </form>
+        <form method="post" action="./ControlUsuario">
+            <button name="saldo" value="saldo">Añadir Saldo</button>
         </form>
         <%
             out.print("<form method='post' action='./PerfilEdicion'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
@@ -53,7 +56,7 @@
                 }
             }
         %>
-        <form action="./Login" method="post">
+        <form action="./ControlUsuario" method="post">
             <table>
                 <tr>
                     <td><label for="nicknameLogin">Nickname:</label></td>

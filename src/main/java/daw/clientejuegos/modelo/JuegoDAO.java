@@ -52,6 +52,42 @@ public class JuegoDAO {
         }
     }
 
+    public static void editar_juego(
+            int id_juego,
+            String nombre_juego,
+            String sistema_operativo,
+            String tipo,
+            String descripcion,
+            int pegi,
+            double precio,
+            String imagen
+    ) {
+        String sql = "update juego set nombre_juego = ?, sistema_operativo = ?, tipo = ?, descripcion = ?, pegi = ?, precio = ?, img = ? where id_juego = ?";
+
+        PreparedStatement prest;
+
+        try {
+            prest = CONEXION.prepareStatement(sql);
+
+            prest.setString(1, nombre_juego);
+            prest.setString(2, sistema_operativo);
+            prest.setString(3, tipo);
+            prest.setString(4, descripcion);
+            prest.setInt(5, pegi);
+            prest.setDouble(6, precio);
+            prest.setString(7, imagen);
+            prest.setInt(8, id_juego);
+
+            prest.executeUpdate();
+
+            prest.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas durante la inserción de datos en la tabla usuario");
+            System.out.println(e);
+        }
+    }
+
     public static ArrayList<JuegoVO> consultarJuegos() {
         Statement st;
         ResultSet res;

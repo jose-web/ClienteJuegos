@@ -5,6 +5,8 @@
  */
 package daw.clientejuegos.controlador;
 
+import daw.clientejuegos.modelo.JuegoDAO;
+import daw.clientejuegos.modelo.UsuarioVO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -38,14 +40,47 @@ public class Admin_juego_creado extends HttpServlet {
         ServletContext contexto = request.getServletContext();
         RequestDispatcher despachador = contexto.getRequestDispatcher("/mis_creaciones.jsp");
 
-        if (request.getParameter("editar") != null) {
+        if (request.getParameter("irAEditar") != null) {
 
             HttpSession sesion = request.getSession(true);
 
-            sesion.setAttribute("editar", request.getParameter("editar"));
+            sesion.setAttribute("irAEditar", request.getParameter("irAEditar"));
 
             RequestDispatcher rd = request.getRequestDispatcher("./editaJuego.jsp");
             rd.forward(request, response);
+        } else if (request.getParameter("editar") != null) {
+            HttpSession sesion = request.getSession(true);
+            UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+
+            int idJuego = Integer.parseInt(request.getParameter("editar"));
+
+            int pertenece = JuegoDAO.consultarPertenenciaJuegoCreado(usuario.getId_usuario(), idJuego);
+
+            despachador = request.getRequestDispatcher("./editaJuego.jsp");
+
+            switch (pertenece) {
+                case 1:
+                    int pegi = Integer.parseInt(request.getParameter("pegi"));
+                    double precio = Double.parseDouble(request.getParameter("precio"));
+
+                    JuegoDAO.editar_juego(
+                            idJuego,
+                            request.getParameter("nombre"),
+                            request.getParameter("so"),
+                            request.getParameter("tipo"),
+                            request.getParameter("descripcion"),
+                            pegi,
+                            precio,
+                            "imagen.jpg"
+                    );
+                    break;
+
+                case 0:
+                case -1:
+                    despachador = request.getRequestDispatcher("./index.jsp");
+                    break;
+
+            }
         }
 
         despachador.forward(request, response);

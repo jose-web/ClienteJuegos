@@ -18,7 +18,6 @@
     <body>
         <%
             HttpSession sesion = request.getSession(true);
-            // int usuario = Integer.parseInt(sesion.getAttribute("idUsuario").toString());
 
             UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
             try {
@@ -27,20 +26,21 @@
 
         %>
 
-
-        <div class='imagen'><img src='img/<%= juego.getImg()%>'></div>
-        <p class='nombre'> <%=juego.getNombre_juego()%> a </p>
-        <p class='precio'><%=juego.getPrecio()%></p>
-        <form method='post' action='./Juego' class='hijo'>
-            <button class='boton' name='juego' value='<%= juego.getId_juego()%>'>
-                Ver
-            </button>
-        </form>
-        <form method='post' action='./Admin_juego_creado' class='hijo'>
-            <button class='boton' name='editar' value='<%= juego.getId_juego()%>'>
-                Editar
-            </button>
-        </form>
+        <div class="juego">
+            <div class='imagen'><img src='img/<%= juego.getImg()%>'></div>
+            <p class='nombre'> <%=juego.getNombre_juego()%></p>
+            <p class='precio'><%=juego.getPrecio()%></p>
+            <form method='post' action='./Juego' class='hijo'>
+                <button class='boton' name='juego' value='<%= juego.getId_juego()%>'>
+                    Ver
+                </button>
+            </form>
+            <form method='post' action='./Admin_juego_creado' class='hijo'>
+                <button class='boton' name='irAEditar' value='<%= juego.getId_juego()%>'>
+                    Editar
+                </button>
+            </form>
+        </div>
 
         <%
                 }

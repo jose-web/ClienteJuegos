@@ -19,7 +19,7 @@
         <%
             UsuarioVO usuario = (UsuarioVO) session.getAttribute("usuario");
 
-            String sesione = session.getAttribute("editar").toString();
+            String sesione = session.getAttribute("irAEditar").toString();
             int idJuego = Integer.parseInt(sesione);
 
             int pertenece = JuegoDAO.consultarPertenenciaJuegoCreado(usuario.getId_usuario(), idJuego);
@@ -34,14 +34,14 @@
 
                     JuegoVO juego = JuegoDAO.buscar_juego(idJuego);
         %>  
-        <form>
+        <form method="post" action="./Admin_juego_creado"> 
             <table>
                 <tr>
                     <td>
                         <label for="nombre">Nombre</label>
                     </td>
                     <td>
-                        <input type="text" name="nombre" id="nombre" value="<%= juego.getNombre_juego()%>">
+                        <input type="text" name="nombre" id="nombre" value="<%=juego.getNombre_juego()%>">
                     </td>
                 </tr>
                 <tr>
@@ -49,9 +49,29 @@
                         <label for="imagen">Imagen</label>
                     </td>
                     <td>
-                        <img src="img/<%= juego.getImg()%>">
+                        <img src="img/<%=juego.getImg()%>">
                         <br>
                         <input type="file" name="imagen" id="imagen">   
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="so">Sistema Operativo</label>
+                    </td>
+                    <td>
+                        <select name="so" id="so">
+                            <option value="w" <%= "w".equals(juego.getSistema_operativo()) ? "selected = 'selected'" : ""%>>w</option>
+                            <option value="l" <%= "l".equals(juego.getSistema_operativo()) ? "selected = 'selected'" : ""%>>l</option>
+                            <option value="m" <%= "m".equals(juego.getSistema_operativo()) ? "selected = 'selected'" : ""%>>m</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tipo">Tipo</label>
+                    </td>
+                    <td>
+                        <textarea name="tipo" id="tipo"><%=juego.getTipo()%></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -59,7 +79,7 @@
                         <label for="descripcion">Descripcion</label>
                     </td>
                     <td>
-                        <textarea name="descripcion" id="descripcion"><%= juego.getDescripcion()%></textarea>
+                        <textarea name="descripcion" id="descripcion"><%=juego.getDescripcion()%></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -67,7 +87,7 @@
                         <label for="precio">Precio</label>
                     </td>
                     <td>
-                        <input type="text" name="precio" id="precio" value="<%= juego.getPrecio()%>">
+                        <input type="text" name="precio" id="precio" value="<%=juego.getPrecio()%>">
                     </td>
                 </tr>
                 <tr>
@@ -75,12 +95,12 @@
                         <label for="pegi">Pegi</label>
                     </td>
                     <td>
-                        <input type="text" name="pegi" id="pegi" value="<%= juego.getPegi()%>">
+                        <input type="number" name="pegi" id="pegi" value="<%=juego.getPegi()%>">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">                        
-                        <input type="submit" name="modificar"  value="Editar">
+                    <td colspan="2">
+                        <button type="submit" name="editar" value="<%=juego.getId_juego()%>">Editar</button>
                     </td>
                 </tr>
             </table>

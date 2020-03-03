@@ -59,10 +59,9 @@ public class JuegoDAO {
             String tipo,
             String descripcion,
             int pegi,
-            double precio,
-            String imagen
+            double precio
     ) {
-        String sql = "update juego set nombre_juego = ?, sistema_operativo = ?, tipo = ?, descripcion = ?, pegi = ?, precio = ?, img = ? where id_juego = ?";
+        String sql = "update juego set nombre_juego = ?, sistema_operativo = ?, tipo = ?, descripcion = ?, pegi = ?, precio = ? where id_juego = ?";
 
         PreparedStatement prest;
 
@@ -75,7 +74,6 @@ public class JuegoDAO {
             prest.setString(4, descripcion);
             prest.setInt(5, pegi);
             prest.setDouble(6, precio);
-            prest.setString(7, imagen);
             prest.setInt(8, id_juego);
 
             prest.executeUpdate();
@@ -113,7 +111,6 @@ public class JuegoDAO {
                 j.setDescripcion(res.getString("descripcion"));
                 j.setPegi(res.getInt("pegi"));
                 j.setPrecio(res.getDouble("precio"));
-                j.setImg(res.getString("img"));
 
                 //Añadimos el objeto al array
                 lista.add(j);
@@ -190,7 +187,6 @@ public class JuegoDAO {
                 juego.setDescripcion(res.getString("descripcion"));
                 juego.setPegi(res.getInt("pegi"));
                 juego.setPrecio(res.getDouble("precio"));
-                juego.setImg(res.getString("img"));
                 //Añadimos el objeto al array
 
             }
@@ -251,7 +247,6 @@ public class JuegoDAO {
                 j.setDescripcion(res.getString("descripcion"));
                 j.setPegi(res.getInt("pegi"));
                 j.setPrecio(res.getDouble("precio"));
-                j.setImg(res.getString("img"));
 
                 //Añadimos el objeto al array
                 lista.add(j);

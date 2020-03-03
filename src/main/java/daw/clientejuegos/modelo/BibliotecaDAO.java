@@ -118,7 +118,6 @@ public class BibliotecaDAO {
                 j.setDescripcion(res.getString("descripcion"));
                 j.setPegi(res.getInt("pegi"));
                 j.setPrecio(res.getDouble("precio"));
-                j.setImg(res.getString("img"));
 
                 lista.add(j);
             }

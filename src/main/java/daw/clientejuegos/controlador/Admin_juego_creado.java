@@ -70,8 +70,7 @@ public class Admin_juego_creado extends HttpServlet {
                             request.getParameter("tipo"),
                             request.getParameter("descripcion"),
                             pegi,
-                            precio,
-                            "imagen.jpg"
+                            precio
                     );
                     break;
 

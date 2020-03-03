@@ -24,9 +24,7 @@
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#390979",GradientType=1);
                 color:white;
             }
-            img{
-                width:25%;
-            }
+
             a{
                 cursor:pointer;
                 text-decoration: none;
@@ -42,9 +40,7 @@
             int idJuego = Integer.parseInt(sesione);
             JuegoVO juego = JuegoDAO.buscar_juego(idJuego);
 
-            // out.print("<img src='img/"+juego.getImg()+"'/>");
             out.print("<h1>" + juego.getNombre_juego() + "</h1>");
-            out.print("<img src='img/" + juego.getImg() + "'>");
             out.print("<p>Descripción: " + juego.getDescripcion() + "</p>");
             char sis = juego.getSistema_operativo().charAt(0);
 

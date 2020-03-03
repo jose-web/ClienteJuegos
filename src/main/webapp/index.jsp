@@ -84,7 +84,6 @@
                 for (JuegoVO juego : juegos) {
                     out.print("<form method='post' action='./Juego' class='hijo'>");
                     out.print("<button class='boton' name='juego' value='" + juego.getId_juego() + "'>");
-                    out.print("<div class='imagen'><img src='img/" + juego.getImg() + "'></div>");
                     out.print("<p class='nombre'>" + juego.getNombre_juego() + "</p>");
                     out.print("<p class='precio'>" + juego.getPrecio() + "</p>");
                     out.print("</button>");

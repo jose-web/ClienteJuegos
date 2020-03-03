@@ -27,7 +27,6 @@
         %>
 
         <div class="juego">
-            <div class='imagen'><img src='img/<%= juego.getImg()%>'></div>
             <p class='nombre'> <%=juego.getNombre_juego()%></p>
             <p class='precio'><%=juego.getPrecio()%></p>
             <form method='post' action='./Juego' class='hijo'>

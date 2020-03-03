@@ -10,7 +10,7 @@ package daw.clientejuegos.modelo;
  * @author Rosa
  */
 public class JuegoVO {
-    
+
     private int id_juego;
     private String nombre_juego;
     private String sistema_operativo;
@@ -18,17 +18,15 @@ public class JuegoVO {
     private String descripcion;
     private int pegi;
     private double precio;
-    private String img;
 
-    public JuegoVO(int id_juego,String nombre_juego, String sistema_operativo, String tipo, String descripcion, int pegi, double precio, String img) {
-        this.id_juego=id_juego;
+    public JuegoVO(int id_juego, String nombre_juego, String sistema_operativo, String tipo, String descripcion, int pegi, double precio) {
+        this.id_juego = id_juego;
         this.nombre_juego = nombre_juego;
         this.sistema_operativo = sistema_operativo;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.pegi = pegi;
         this.precio = precio;
-        this.img=img;
     }
 
     public JuegoVO() {
@@ -66,14 +64,6 @@ public class JuegoVO {
         this.tipo = tipo;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -100,13 +90,6 @@ public class JuegoVO {
 
     @Override
     public String toString() {
-        return "JuegoVO{" + "id_juego=" + id_juego + ", nombre_juego=" + nombre_juego + ", sistema_operativo=" + sistema_operativo + ", tipo=" + tipo + ", descripcion=" + descripcion + ", pegi=" + pegi + ", precio=" + precio + ", img=" + img + '}';
+        return "JuegoVO{" + "id_juego=" + id_juego + ", nombre_juego=" + nombre_juego + ", sistema_operativo=" + sistema_operativo + ", tipo=" + tipo + ", descripcion=" + descripcion + ", pegi=" + pegi + ", precio=" + precio + '}';
     }
-
-    
-
-  
-    
-    
-    
 }

@@ -46,16 +46,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="imagen">Imagen</label>
-                    </td>
-                    <td>
-                        <img src="img/<%=juego.getImg()%>">
-                        <br>
-                        <input type="file" name="imagen" id="imagen">   
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <label for="so">Sistema Operativo</label>
                     </td>
                     <td>

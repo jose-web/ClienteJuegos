@@ -11,9 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Añadir Saldo</title>
         <%
-              HttpSession sesion = request.getSession(true);
-            out.print(sesion.getAttribute("sentencia"));
-            %>
+            HttpSession sesion = request.getSession(true);
+            //  out.print(sesion.getAttribute("sentencia"));
+%>
     </head>
     <body>
         <h1>Añadir Saldo</h1>
@@ -21,7 +21,39 @@
             <table>
                 <tr>
                     <td>
-                       Cantidad a añadir
+                        Titular Tarjeta de Crédito
+                    </td>
+                    <td>
+                        <input type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Número de tarjeta de crédito
+                    </td>
+                    <td>
+                        <input type="number" maxlength="16"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        CVV
+                    </td>
+                    <td>
+                        <input type="number" maxlength="3" pattern="{3}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Caducidad
+                    </td>
+                    <td>
+                        <input type="date"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Cantidad a añadir
                     </td>
                     <td>
                         <input type="number" step="0.01" name="saldoNuevo"/>

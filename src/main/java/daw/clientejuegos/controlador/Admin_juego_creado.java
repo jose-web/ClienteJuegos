@@ -80,6 +80,14 @@ public class Admin_juego_creado extends HttpServlet {
                     break;
 
             }
+        } else if (request.getParameter("borrarJuego") != null) {
+            HttpSession sesion = request.getSession(true);
+            UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+
+            int id_juego = Integer.parseInt(request.getParameter("borrarJuego"));
+
+            JuegoDAO.borrar_juego(usuario.getId_usuario(), id_juego);
+
         }
 
         despachador.forward(request, response);

@@ -202,24 +202,43 @@ public class JuegoDAO {
 
     }
 
-    public static int delete_juego(int juego) {
+    public static int borrar_juego(int idUsuario, int idJuego) {
+        Statement st;
 
-        int numFilas = -1;
+        int propietario = consultarPertenenciaJuegoCreado(idUsuario, idJuego);
+        if (propietario == 1) {
 
-        String sql = "delete from juego where id_juego = ?";
+            String sql = "";
 
-        // Sentencia parametrizada
-        try {
-            PreparedStatement prest = CONEXION.prepareStatement(sql);
-            // Establecemos los parámetros de la sentencia
-            prest.setInt(1, juego);
-            // Ejecutamos la sentencia
-            numFilas = prest.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Problemas durante el borrado en la tabla juego");
-            System.out.println(e);
+            try {
+
+                st = CONEXION.createStatement();
+
+                // Iniciamos transacción
+                sql = "start transaction";
+                st.executeQuery(sql);
+
+                //Hacemos borrado del juego en la tabla biblioteca
+                sql = "delete from biblioteca where id_juego =" + idJuego;
+                st.executeUpdate(sql);
+
+                //Hacemos borrado del juego en la tabla creado_por
+                sql = "delete from creado_por where id_juego =" + idJuego;
+                st.executeUpdate(sql);
+
+                //Hacemos borrado del juego en la tabla juego
+                sql = "delete from juego where id_juego =" + idJuego;
+                st.executeUpdate(sql);
+
+                sql = "commit";
+                st.executeQuery(sql);
+
+                st.close();
+            } catch (SQLException e) {
+                return -1;
+            }
         }
-        return numFilas;
+        return 1;
     }
 
     public static ArrayList<JuegoVO> consultarJuegosCreados(int id_usuario) {

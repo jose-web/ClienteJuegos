@@ -38,6 +38,10 @@
                 <button class='boton' name='irAEditar' value='<%= juego.getId_juego()%>'>
                     Editar
                 </button>
+                <button class='boton' name='borrarJuego' value='<%= juego.getId_juego()%>'>
+                    Borrar Juego
+                </button>
+
             </form>
         </div>
 

@@ -110,7 +110,7 @@ public class JuegoDAO {
             prest.setString(4, descripcion);
             prest.setInt(5, pegi);
             prest.setDouble(6, precio);
-            prest.setInt(8, id_juego);
+            prest.setInt(7, id_juego);
 
             prest.executeUpdate();
 

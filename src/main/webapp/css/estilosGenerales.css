@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4 mar. 2020, 8:51:31
+    Author     : rosa
+*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    background: rgb(0,0,0);
+    background: -moz-linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
+    background: -webkit-linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
+    background: linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#390979",GradientType=1);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+

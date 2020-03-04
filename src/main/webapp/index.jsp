@@ -12,11 +12,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cliente Juegos</title>
-        <link rel="stylesheet" href="estilos.css"/>
+        <link rel="stylesheet" href="css/estilosGenerales.css"/>
+        <link rel="stylesheet" href="css/estilosIndex.css"/>
     </head>
     <body>
 
     <header>
+        <h1>Cliente Juegos</h1>
         <%
             HttpSession sesion = request.getSession(true);
             // int usuario = Integer.parseInt(sesion.getAttribute("idUsuario").toString());
@@ -27,19 +29,19 @@
                 out.print("<div> Hola " + usuario.getNombre() + "(" + usuario.getNickname() + ") Tienes un saldo de " + usuario.getSaldo() + "€</div>");
         %>
         <form action="./ControlUsuario" method="post">
-            <button name="cerrarSesion" value="cerrarSesion"> Cerrar sesión</button>
+            <button class="botonHeader"  name="cerrarSesion" value="cerrarSesion"> Cerrar sesión</button>
         </form>
         <form method="post" action="./biblioteca.jsp">
-            <button>Ver biblioteca</button>
+            <button class="botonHeader">Ver biblioteca</button>
         </form>
         <form method="post" action="./Admin_juego_creado">
-            <button>Mis creaciones</button>
+            <button class="botonHeader">Mis creaciones</button>
         </form>
         <form method="post" action="./ControlUsuario">
-            <button name="saldo" value="saldo">Añadir Saldo</button>
+            <button  class="botonHeader" name="saldo" value="saldo">Añadir Saldo</button>
         </form>
         <%
-            out.print("<form method='post' action='./PerfilEdicion'><button name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
+            out.print("<form method='post' action='./PerfilEdicion'><button class='botonHeader' name='editar_perfil' value='editar_perfil'>Editar Perfil</button></form>");
         } else {
             if (sesion.getAttribute("error") != null) {
                 int error = Integer.parseInt(sesion.getAttribute("error").toString());
@@ -56,27 +58,33 @@
                 }
             }
         %>
-        <form action="./ControlUsuario" method="post">
+        <button class="botonHeader" onclick="muestraLogin()">Login</button>
+        <form method="post" action="./ControlUsuario">
+            <button class="botonHeader" name="registrarse" value="registrarse"> Registrarse</button>
+        </form>
+        <div id="popup" class="oculto">
+            <div id="fondoPopUp" onclick="salirPopUp()"></div>
+        <form action="./ControlUsuario" method="post" id="login">
             <table>
                 <tr>
                     <td><label for="nicknameLogin">Nickname:</label></td>
                     <td><input type="text" name="nicknameLogin" id="nicknameLogin" required></td>
                 </tr>
                 <tr>
-                    <td><label for="passLogin">Contraseña</label></td>
+                    <td><label for="passLogin">Contraseña:</label></td>
                     <td><input type="password" name="passLogin" id="passLogin" required></td>
                 </tr>
                 <tr>
                     <td><button name="entrar" value="entrar" type="submit"> Entrar</button></td>
-                    <td><button name="registrarse" value="registrarse" onclick="registro()"> Registrarse</button></td>
+
                 </tr>
             </table>
         </form>
+        </div>
         <%
             }
         %>
     </header>
-    <h1>Cliente Juegos</h1>
     <div id="contenido">
         <%
             try {

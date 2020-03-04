@@ -16,6 +16,9 @@
         <title>Mis creaciones</title>
     </head>
     <body>
+        <form method="post" action="./Admin_juego_creado">
+            <button name="subir">Subir un juego</button>
+        </form>
         <%
             HttpSession sesion = request.getSession(true);
 

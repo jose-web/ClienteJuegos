@@ -88,6 +88,26 @@ public class Admin_juego_creado extends HttpServlet {
 
             JuegoDAO.borrar_juego(usuario.getId_usuario(), id_juego);
 
+        } else if (request.getParameter("subir") != null) {
+            despachador = request.getRequestDispatcher("./subeJuego.jsp");
+        } else if (request.getParameter("addJuego") != null) {
+            HttpSession sesion = request.getSession(true);
+            UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+
+            int pegi = Integer.parseInt(request.getParameter("pegi"));
+            double precio = Double.parseDouble(request.getParameter("precio"));
+
+            JuegoDAO.insertar_juego(
+                    usuario.getId_usuario(),
+                    request.getParameter("nombre"),
+                    request.getParameter("so"),
+                    request.getParameter("tipo"),
+                    request.getParameter("descripcion"),
+                    pegi,
+                    precio
+            );
+            despachador = request.getRequestDispatcher("./mis_creaciones.jsp"
+            );
         }
 
         despachador.forward(request, response);

@@ -21,6 +21,7 @@ public class JuegoDAO {
     private static final Connection CONEXION = Conexion.getInstance();
 
     public static void insertar_juego(
+            int id_usuario,
             String nombre_juego,
             String sistema_operativo,
             String tipo,
@@ -28,11 +29,24 @@ public class JuegoDAO {
             int pegi,
             double precio
     ) {
-        String sql = "insert into juego(nombre_juego, sistema_operativo, tipo, descripcion, pegi, precio) values (?,?,?,?,?,?)";
+
+        Statement st;
+        ResultSet res;
+        String sql;
 
         PreparedStatement prest;
 
         try {
+
+            st = CONEXION.createStatement();
+
+            // Iniciamos la transacción
+            sql = "start transaction";
+            st.executeQuery(sql);
+
+            // Insertamos el juego
+            sql = "insert into juego(nombre_juego, sistema_operativo, tipo, descripcion, pegi, precio) values (?,?,?,?,?,?)";
+
             prest = CONEXION.prepareStatement(sql);
 
             prest.setString(1, nombre_juego);
@@ -44,7 +58,29 @@ public class JuegoDAO {
 
             prest.executeUpdate();
 
+            // Recogemos el último id  ya que este es el id de nuestro juego 
+            sql = "select max(id_juego) as ultima_id from juego";
+
+            res = st.executeQuery(sql);
+            res.next();
+
+            int id_juego = res.getInt("ultima_id");
+
+            // Creamos la asociación de el juego con su creador
+            sql = "insert into creado_por(id_usuario,id_juego) values (?,?)";
+            prest = CONEXION.prepareStatement(sql);
+
+            prest.setInt(1, id_usuario);
+            prest.setInt(2, id_juego);
+
+            prest.executeUpdate();
+
+            // Hacemos commit para que los cambios sean guardados
+            sql = "commit";
+            st.executeQuery(sql);
+
             prest.close();
+            st.close();
 
         } catch (SQLException e) {
             System.out.println("Problemas durante la inserción de datos en la tabla usuario");

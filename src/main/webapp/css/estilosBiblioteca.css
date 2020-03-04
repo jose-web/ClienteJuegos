@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-mar-2020, 18:00:22
+    Author     : Jose
+*/
+
+h1{
+    flex:100%;
+    background-color:white;
+    padding:0.5em;
+    border-radius: 0 0 0.5em 0.5em;
+    text-align: center;
+    margin-bottom:0.5em;
+}
+
+.hijo{
+    flex:1 30%;
+    margin:1em;
+}
+
+.hijo button{
+    background-color:purple;
+    padding:1em;
+    width:100%;
+    height: 100%;
+    color:white;
+    border:0.05em solid white;
+    border-radius: 0.5em;
+    cursor:pointer;
+    transition: 0.5s;
+    font-weight: bold;
+}
+
+.hijo button:hover{
+    background-color:rgb(75, 1, 75);
+}
+
+#volver{
+    flex:100%;
+    text-decoration: none;
+    color:blue;
+    text-align: center;
+    cursor:pointer;
+    background-color:lightblue;
+    margin:1em;
+    padding:1em;
+    position: sticky;
+    bottom:0;
+    border-radius: 0.5em;
+    transition:0.5s
+}
+
+#volver:hover{
+    background-color:rgb(118, 208, 238);
+    color:white;
+}

@@ -14,6 +14,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edita tu juego</title>
+        <link rel="stylesheet" href="css/estilosGenerales.css"/>
+        <link rel="stylesheet" href="css/estilosEditarJuego.css"/>
     </head>
     <body>
         <%
@@ -34,7 +36,8 @@
 
                     JuegoVO juego = JuegoDAO.buscar_juego(idJuego);
         %>  
-        <form method="post" action="./Admin_juego_creado"> 
+        <form method="post" action="./Admin_juego_creado" id="editarJuego"> 
+            <h1>Editar juego</h1>
             <table>
                 <tr>
                     <td>
@@ -90,14 +93,14 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="submit" name="editar" value="<%=juego.getId_juego()%>">Editar</button>
+                        <button type="submit" name="editar" id="editar" value="<%=juego.getId_juego()%>">Editar</button>
                     </td>
                 </tr>
             </table>
+            <a href='mis_creaciones.jsp' id="volver">Volver</a>
         </form>
         <%
             }
         %>
-        <p><a href='mis_creaciones.jsp'>Volver</a></p>
     </body>
 </html>

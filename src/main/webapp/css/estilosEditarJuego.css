@@ -1,0 +1,80 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-mar-2020, 19:53:03
+    Author     : Jose
+*/
+
+body{
+    justify-content: center;
+}
+
+#editarJuego{
+    width:50%;
+    background-color: white;
+    border-radius: 0.5em;
+    padding:0.5em;
+    box-shadow: 0 0 0.5em fuchsia;
+    overflow: hidden;
+}
+
+h1{
+    text-align: center;
+    background-color:rgb(78, 3, 78);
+    color:white;
+    margin-bottom: 0.5em;
+    padding:0.3em;
+}
+form{
+    display:flex;
+    flex-direction: column;
+}
+input, textarea, select{
+    padding:0.5em;
+    color:rgb(78, 3, 78);
+    width:100%;
+}
+
+#volver{
+    text-decoration: none;
+    width:100%;
+    padding:0.5em;
+    border:none;
+    text-align: center;
+    background-color: lightblue;
+    color:blue;
+    border-radius:0.3em;
+
+
+}
+
+#volver:hover{
+    background-color:rgb(118, 208, 238);
+    color:white;
+}
+
+#editar{
+    border:none;
+    padding:0.6em;
+    background-color: rgb(78, 3, 78);
+    color:white;
+    cursor:pointer;
+    border-radius:0.3em;
+    width:100%;
+
+}
+
+#editar:hover{
+    background-color: darkmagenta;
+}
+label{
+    font-weight: bold;
+    color:rgb(78, 3, 78);
+}
+
+td{
+    padding-bottom: 1em;
+}

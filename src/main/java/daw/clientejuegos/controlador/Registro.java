@@ -63,22 +63,26 @@ public class Registro extends HttpServlet {
                 out.println("usuario no insertado porque es menor de edad");
 
             } else {
+                int existe = UsuarioDAO.existe_nick(nickname, -1);
+                if (existe == 0) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate fechaNueva = LocalDate.parse(fecnac, formatter);
 
-                LocalDate fechaNueva = LocalDate.parse(fecnac, formatter);
-                UsuarioDAO.insertar_usuario(nombre, pass, fechaNueva, 0, nickname);
+                    UsuarioDAO.insertar_usuario(nombre, pass, fechaNueva, 0, nickname);
 
-                HttpSession sesion = request.getSession(true);
-                UsuarioVO usuario = UsuarioDAO.busca_usuario_nickcame(nickname);
+                    HttpSession sesion = request.getSession(true);
+                    UsuarioVO usuario = UsuarioDAO.busca_usuario_nickcame(nickname);
 
-                sesion.setAttribute("usuario", usuario);
+                    sesion.setAttribute("usuario", usuario);
+                }
 
                 ServletContext contexto = request.getServletContext();
 
                 RequestDispatcher despachador = contexto.getRequestDispatcher("/index.jsp");
 
                 despachador.forward(request, response);
+
             }
 
         } finally {

@@ -9,6 +9,7 @@ function muestraLogin() {
     window.setTimeout(function () {
         document.getElementById("login").classList.add('escalar');
         document.getElementById("fondoPopUp").classList.add('fondoVisiblePopUp');
+        document.getElementById("nicknameLogin").focus();
     }, 100);
 
 }

@@ -85,7 +85,7 @@
             }
         %>
     </header>
-    <div id="contenido">
+    <main>
         <%
             try {
                 ArrayList<JuegoVO> juegos = JuegoDAO.consultarJuegos();
@@ -102,7 +102,7 @@
             }
 
         %>
-    </div>
+    </main>
 
     <script src="js/script.js"></script>
 </body>

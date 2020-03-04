@@ -1,0 +1,126 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4 mar. 2020, 11:58:08
+    Author     : jose
+*/
+body{
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+
+main{
+    flex-direction: column;
+}
+
+main> div{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+#nombre{
+    text-align: center;
+    padding: 1em;
+    flex:1 100%;
+    margin-top: 0;
+    margin:0 0.5em 0.5em 0.5em;
+    border-top:0;
+}
+
+#descripcion{
+    flex:1 100%;
+}
+
+#so{
+    flex:1;
+    text-align:center;
+}
+#so i{
+    font-size: 2em;
+}
+
+#precio{
+    flex:2;
+    text-align:center;
+}
+#pegi{
+    flex: 1;
+    text-align:center;
+}
+
+#comprar{
+    flex:1 100%;
+    border-radius:0.5em;
+    text-align:center;
+    padding:0.5em;
+}
+#comprar button{
+    width:100%;
+    height:100%;
+    padding:1em;
+    cursor:pointer;
+
+    background-color:rgb(159, 25, 236);
+    border:none;
+    border-radius: 0.5em;
+    color:black;
+    transition:0.5s
+}
+.adquirir{
+    padding:0 !important;
+    background-color:transparent !important;
+}
+
+#comprar button:hover{
+    background-color:rgb(129, 22, 190);
+    color:white;
+}
+
+#volver{
+    flex:100%;
+    text-decoration: none;
+    color:blue;
+    text-align: center;
+    cursor:pointer;
+    background-color:lightblue;
+    margin:1em;
+    padding:1em;
+    position: sticky;
+    bottom:0;
+    border-radius: 0.5em;
+    transition:0.5s
+}
+#volver:hover{
+    background-color:rgb(118, 208, 238);
+    color:white;
+}
+
+.apartado{
+    border: 0.05em solid black;
+    background-color:white;
+    margin:1em;
+    border-radius: 0 0 0.5em 0.5em;
+    box-shadow: 0 0 1em purple;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo{
+    width:100%;
+    padding: 0.5em;
+    background-color: purple;
+    color:white;
+    text-align: center ;
+}
+
+.contenido{
+    margin-top:auto;
+    margin-bottom: auto;
+    padding:1em;
+}

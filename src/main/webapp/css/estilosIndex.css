@@ -17,6 +17,7 @@ header{
     align-items: center;
     position:sticky;
     top:0;
+    width:100%;
 }
 h1{
     margin-right:auto;
@@ -48,15 +49,15 @@ h1{
 }
 
 #fondoPopUp{
-   background-color: rgba(0, 0, 0, 0.5);
-   position:fixed;
-   top:0;
-   left:0;
-   width:100vw;
-   height:100vh;
-   z-index: 1;
-   transition:0.5s;
-   opacity:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    z-index: 1;
+    transition:0.5s;
+    opacity:0;
 }
 
 .fondoVisiblePopUp{
@@ -81,13 +82,10 @@ h1{
 .botonHeader:hover{
     background-color:rgb(57,9,121);
     color:white;
-    
-    
+
+
 }
-#contenido{
-    display:flex;
-    flex-wrap: wrap;
-}
+
 .hijo{
     flex:1 30%;
     margin:1em;
@@ -101,11 +99,11 @@ h1{
     border:0.05em solid white;
     border-radius: 0.5em;
     cursor:pointer;
-     transition: 0.5s;
-     font-weight: bold;
+    transition: 0.5s;
+    font-weight: bold;
 }
 
 .hijo button:hover{
     background-color:rgb(75, 1, 75);
-    
+
 }

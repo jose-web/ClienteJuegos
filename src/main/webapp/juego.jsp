@@ -14,67 +14,58 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Juego</title>
+        <link rel="stylesheet" href="css/estilosGenerales.css"/>
+        <link rel="stylesheet" href="css/estilosJuego.css"/>
         <script src="https://kit.fontawesome.com/0d44a327d6.js" crossorigin="anonymous"></script>
-        <style>
-            body{
-                background: rgb(0,0,0);
-                background: -moz-linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
-                background: -webkit-linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
-                background: linear-gradient(146deg, rgba(0,0,0,1) 0%, rgba(14,0,80,1) 50%, rgba(57,9,121,1) 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#390979",GradientType=1);
-                color:white;
-            }
-
-            a{
-                cursor:pointer;
-                text-decoration: none;
-                color:purple;
-
-            }
-
-        </style>
     </head>
     <body>
-        <%
-            String sesione = session.getAttribute("idJuego").toString();
-            int idJuego = Integer.parseInt(sesione);
-            JuegoVO juego = JuegoDAO.buscar_juego(idJuego);
+        <main>
+            <div>
+                <%
+                    String sesione = session.getAttribute("idJuego").toString();
+                    int idJuego = Integer.parseInt(sesione);
+                    JuegoVO juego = JuegoDAO.buscar_juego(idJuego);
 
-            out.print("<h1>" + juego.getNombre_juego() + "</h1>");
-            out.print("<p>Descripción: " + juego.getDescripcion() + "</p>");
-            char sis = juego.getSistema_operativo().charAt(0);
+                    out.print("<h1 id='nombre' class='apartado'>" + juego.getNombre_juego() + "</h1>");
+                    out.print("<div id='descripcion' class='apartado'><div class='titulo'>Descripción</div><div class='contenido'> " + juego.getDescripcion() + "</div></div>");
+                    char sis = juego.getSistema_operativo().charAt(0);
 
-            //out.print(sis);
-            switch (sis) {
-                case 'w':
-                    out.print("<i class='fab fa-windows'></i>");
-                    break;
-                case 'l':
-                    out.print("<i class='fab fa-linux'></i>");
-                    break;
-                case 'm':
-                    out.print("<i class='fab fa-apple'></i>");
-                    break;
-            }
-            out.print("<p>Precio: " + juego.getPrecio() + "</p>");
-            out.print("<p>Pegi: " + juego.getPegi() + "</p>");
+                    //out.print(sis);
+                    out.print("<div id='so' class='apartado'> <div class='titulo'>Sistema operativo</div><div class='contenido'><i class='fab ");
+                    switch (sis) {
+                        case 'w':
+                            out.print("fa-windows '></i>");
+                            break;
+                        case 'l':
+                            out.print("fa-linux'></i>");
+                            break;
+                        case 'm':
+                            out.print("fa-apple'></i>");
+                            break;
+                    }
+                    out.print("</div></div>");
 
-            HttpSession sesion = request.getSession(true);
-            if (sesion.getAttribute("usuario") != null) {
-                UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
-                if (BibliotecaDAO.usuario_tiene_juego(usuario.getId_usuario(), idJuego)) {
-                    out.print("Ya tienes este juego");
-                } else {
-        %>   
-        <form method="post" action="./Juego">
-            <button name="adquirirJuego" value="adquirirJuego">Adquirir Juego</button>
-        </form>
-        <%
-                }
-            } else {
-                out.print("Debes estar registrado para comprar este producto");
-            }
-        %>
-        <p><a href='index.jsp'>Volver</a></p>
+                    out.print("<div id='precio' class='apartado'><div class='titulo'>Precio</div><div class='contenido'> " + juego.getPrecio() + "</div></div>");
+                    out.print("<div id='pegi' class='apartado'><div class='titulo'>Pegi</div><div class='contenido'> " + juego.getPegi() + "</div></div>");
+
+                    HttpSession sesion = request.getSession(true);
+                    if (sesion.getAttribute("usuario") != null) {
+                        UsuarioVO usuario = (UsuarioVO) sesion.getAttribute("usuario");
+                        if (BibliotecaDAO.usuario_tiene_juego(usuario.getId_usuario(), idJuego)) {
+                            out.print("<div id='comprar' class='apartado'>Ya tienes este juego</div>");
+                        } else {
+                %>   
+                <form method="post" action="./Juego" id='comprar' class='apartado adquirir'>
+                    <button name="adquirirJuego" value="adquirirJuego">Adquirir Juego</button>
+                </form>
+                <%
+                        }
+                    } else {
+                        out.print("<div id='comprar' class='apartado'>Debes estar registrado para comprar este producto</div>");
+                    }
+                %>
+                <a id='volver' href='index.jsp'>Volver</a>
+            </div>
+        </main>
     </body>
 </html>
